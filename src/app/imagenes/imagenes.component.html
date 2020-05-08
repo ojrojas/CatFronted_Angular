@@ -1,0 +1,11 @@
+<div class="row justify-content-md-center p-3 m-auto">
+    <div class="card" *ngFor="let gato of gatos" 
+    [class.selected]="gato === selectedPaciente" (click)="onSelected(gato)">
+        <img src="{{gato.url}}" class="card-img-top img-thumbnail" style="width: 200px; height: 200px;" alt="{{gato.url}}">
+        <div class="card-body">
+            <h5 class="card-title">{{ gato.id}}</h5>
+            <a [routerLink]="['/gatos/', gato.id]"><i class="far fa-kiss-wink-heart fa-3x" style="color:gray"></i></a>
+        </div>
+    </div>
+   
+</div>
