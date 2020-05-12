@@ -11,6 +11,7 @@ export class ImagenesComponent implements OnInit {
 
   gatos: ImagenesModel[] = new Array<ImagenesModel>();
   selectedPaciente: ImagenesModel;
+  selected: boolean = false;
 
   constructor(private imagenService: ImagenesService) { }
 
@@ -21,8 +22,24 @@ export class ImagenesComponent implements OnInit {
   }
 
   onSelected(imagenSelected: ImagenesModel) {
-    this.selectedPaciente = imagenSelected;
-    console.log("Seleccionado: ", this.selectedPaciente.id);
+    if (!imagenSelected.favorita) {
+      imagenSelected.favorita = true;
+      this.selectedPaciente = imagenSelected;
+      console.log("Seleccionado: ", this.selectedPaciente.id);
+      this.imagenService.createGatoFavorito(imagenSelected).subscribe(
+        (val) => {
+          console.log(val);
+        }
+      );
+    }else{
+      this.selectedPaciente = imagenSelected;
+      console.log("Seleccionado: ", this.selectedPaciente.id);
+      this.imagenService.deleteGatoFavorito(imagenSelected).subscribe(
+        (val) => {
+          console.log(val);
+        }
+      );
+    }
   }
 
   async obtenerGatos() {
