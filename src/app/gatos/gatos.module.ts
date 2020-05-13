@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { GatosRoutingModule } from './gatos-routing.module';
 import { GatosComponent } from './gatos.component';
 import { CreateGatoComponent } from './creategato.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CreateGatoComponent } from './creategato.component';
   ],
   imports: [
     CommonModule,
-    GatosRoutingModule
+    GatosRoutingModule,
+    FormsModule
   ]
 })
 export class GatosModule { }

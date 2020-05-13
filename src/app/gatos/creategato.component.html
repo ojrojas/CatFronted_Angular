@@ -3,13 +3,18 @@
         <h3>Gato</h3>
     </div>
     <div class="col-4">
-        <form>
+        <form #gatoForm="ngForm" (ngSubmit)="gatoForm.form.valid && onSubmit(gatoForm)">
             <div class="form-row">
                 <div class="col-md-12 mb-6">
                     <label for="validationCustom01">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                        [ngClass]="{ 'is-invalid': gatoForm.submitted && nombre.invalid }" required
+                        [(ngModel)]="model.nombre" #nombre="ngModel">
                     <div class="valid-feedback">
                         Looks good!
+                    </div>
+                    <div class="invalid-feedback" *ngIf="gatoForm.submitted && nombre.invalid">
+                        <p *ngIf="nombre.errors.required">El campo nombre es requerido</p>
                     </div>
                 </div>
 
@@ -17,18 +22,29 @@
             <div class="form-row">
                 <div class="col-md-12 mb-6">
                     <label for="validationCustom01">Raza</label>
-                    <input type="text" class="form-control" id="raza" placeholder="Raza" required>
+                    <input type="text" name="raza" class="form-control" id="raza" placeholder="Raza" required
+                        [ngClass]="{ 'is-invalid': gatoForm.submitted && raza.invalid }" required
+                        [(ngModel)]="model.raza" #raza="ngModel">
                     <div class="valid-feedback">
                         Looks good!
+                    </div>
+                    <div class="invalid-feedback" *ngIf="gatoForm.submitted && raza.invalid">
+                        <p *ngIf="raza.errors.required">El campo raza es requerido</p>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-12 mb-6">
                     <label for="validationCustom01">Edad</label>
-                    <input type="text" class="form-control" id="edad" placeholder="Edad" required>
+                    <input type="number" name="edad" class="form-control" id="edad" placeholder="Edad" required
+                        [ngClass]="{ 'is-invalid': gatoForm.submitted && edad.invalid }" required
+                        [(ngModel)]="model.edad" #edad="ngModel" [pattern]="NumberPattern">
                     <div class="valid-feedback">
                         Looks good!
+                    </div>
+                    <div class="invalid-feedback" *ngIf="gatoForm.submitted && edad.invalid">
+                        <p *ngIf="edad.errors.required">El campo edad es requerido</p>
+                        <p *ngIf="!edad.errors.pattern">Solo se permiten numeros</p>
                     </div>
                 </div>
 
@@ -36,21 +52,27 @@
             <div class="form-row">
                 <div class="col-md-12 mb-6">
                     <label for="validationCustom01">Foto</label>
-                    <input type="text" class="form-control" id="foto" placeholder="Foto" required>
+                    <input type="text" name="foto" class="form-control" id="foto" placeholder="Foto" required
+                        [ngClass]="{ 'is-invalid': gatoForm.submitted && foto.invalid }" required
+                        [(ngModel)]="model.foto" #foto="ngModel">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
+                    <div class="invalid-feedback" *ngIf="gatoForm.submitted && foto.invalid">
+                        <p *ngIf="foto.errors.required">El campo foto es requerido</p>
+                    </div>
                 </div>
             </div>
+            <br>
             <div class="form-group">
-                <button class="btn btn-primary">Crear</button>
+                <button class="btn btn-primary" type="submit">Crear</button>
                 <button class="btn btn-default">Cancelar</button>
             </div>
         </form>
     </div>
     <div class="col-8">
         <div class="row">
-            <div class="card" *ngFor="let gato of gatos"   [class.selected]="gato === selectedGato" >
+            <div class="card" *ngFor="let gato of gatos" [class.selected]="gato === selectedGato">
                 <img src="{{gato.url}}" style="width: 100px;height: 100px;" (click)="onSelected(gato)">
             </div>
         </div>
