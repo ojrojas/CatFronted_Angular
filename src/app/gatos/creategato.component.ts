@@ -4,6 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { GatosService } from './gatos.service';
 import { ImagenesService } from '../imagenes/imagenes.service';
 import { ImagenesModel } from '../imagenes/imagenes.model';
+import { GatosModel } from './gatos.model';
 
 @Component({
   selector: 'app-creategato',
@@ -12,8 +13,12 @@ import { ImagenesModel } from '../imagenes/imagenes.model';
 })
 export class CreateGatoComponent implements OnInit {
 
-  gatos: ImagenesModel = new ImagenesModel();
+  gatos: ImagenesModel[] = new Array<ImagenesModel>();
+  gato:GatosModel;
   parametro: string;
+
+  selectedGato: ImagenesModel;
+  selected: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,18 +27,31 @@ export class CreateGatoComponent implements OnInit {
     private imagenesService: ImagenesService) { }
 
   ngOnInit(): void {
-    this.parametro = this.route.snapshot.params.id;
-    this.obtenerGatoById(this.parametro);
-    console.log("El parametro es", this.parametro);
+    this.obtenerImagenesGatos();
   }
 
-  async obtenerGatoById(parametro: string) {
-   await this.imagenesService.getGato(parametro).subscribe((val: ImagenesModel) => {
+  obtenerGatoById(parametro: string)  {
+   this.gatoService.getGato(parametro).subscribe((val: GatosModel) => {
       console.log("antes de setear", val);
-      this.gatos = (val);
-    }, error => { console.log(`No se obtuvo respuesta`) },
-      () => {
-        console.log("consulta finalizada");
-      });;
+      this.gato = val;
+    }, error => { console.log(`No se obtuvo respuesta`); }, () => {
+      console.log("consulta finalizada");
+    });;
   }
+
+  obtenerImagenesGatos() {
+    this.imagenesService.getImagenesBackend().subscribe((val: ImagenesModel[]) => {
+      this.gatos = val;
+    });
+  }
+
+  onSelected(imagenSelected:ImagenesModel){
+    this.selectedGato = imagenSelected;
+    let element =<HTMLInputElement> document.getElementById("foto");
+    element.value = this.selectedGato.url;
+    console.log(this.selectedGato.url);
+    console.log(element)
+  }
+
+
 }

@@ -1,11 +1,14 @@
+<div class="container">
+    <h4>Selecciona tus imagenes favoritas!!!</h4>
+</div>
 <div class="row justify-content-md-center p-3 m-auto">
     <div class="card" *ngFor="let gato of gatos" 
-    [class.selected]="gato === selectedPaciente" >
+    [class.selected]="gato === selectedGato" >
         <img src="{{gato.url}}" class="card-img-top img-thumbnail" style="width: 200px; height: 200px;" alt="{{gato.url}}">
         <div class="card-body">
             <h5 class="card-title">{{ gato.id}}</h5>
-            <a (click)="onSelected(gato)"><i class="far fa-kiss-wink-heart fa-3x" style="color:gray"></i></a>
+            <a (click)="onSelected(gato)"><i id="icono{{gato.id}}" class="far fa-kiss-wink-heart fa-3x" style="color:gray"></i></a>
+            <span id="span{{gato.id}}" style="font-size: 10;"></span>
         </div>
     </div>
-   
 </div>

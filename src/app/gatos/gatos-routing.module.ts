@@ -6,7 +6,7 @@ import { CreateGatoComponent } from './creategato.component';
 const routes: Routes = [
   
   {
-    path:':id', component: CreateGatoComponent
+    path:'crear', component: CreateGatoComponent
   },
   {
     path:'', component: GatosComponent, 

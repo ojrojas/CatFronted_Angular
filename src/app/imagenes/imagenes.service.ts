@@ -17,14 +17,31 @@ export class ImagenesService {
 
   constructor(private http: HttpClient, private baseUrls: InyectablesRutas ) { }
 
-  getGatos(): Observable<ImagenesModel[]> {
+  getImagenes(): Observable<ImagenesModel[]> {
     const urlQuery = this.baseUrls.BaseCatApi + '/images/search';
-    console.log("urlQuery GetGatos" , urlQuery);
+    console.log("urlQuery getImagenes" , urlQuery);
     return this.http.get<Array<ImagenesModel>>(
       urlQuery, { headers: headers })
       .pipe(
-        map(response => {
-          return <Array<ImagenesModel>>response.map(item => {
+        map((response: ImagenesModel[]) => {
+          return <Array<ImagenesModel>> response.map(item => {
+            return new ImagenesModel({
+              favorita: item.favorita,
+              id: item.id,
+              url: item.url,
+            });
+          });
+        }));
+  }
+
+  getImagenesBackend(): Observable<ImagenesModel[]> {
+    const urlQuery = this.baseUrls.BaseBackend + '/imagenes';
+    console.log("urlQuery getImagenes" , urlQuery);
+    return this.http.get<Array<ImagenesModel>>(
+      urlQuery, { headers: headers })
+      .pipe(
+        map((response: ImagenesModel[]) => {
+          return <Array<ImagenesModel>> response.map(item => {
             return new ImagenesModel({
               favorita: item.favorita,
               id: item.id,
@@ -50,7 +67,6 @@ export class ImagenesService {
     console.log('urlQuery Crear gato favorito', urlQuery);
     return this.http.post(urlQuery, imagenGato).pipe(
       map((response:ImagenesModel) => { 
-        console.log(response);
         return response;
       })
     )
@@ -66,10 +82,4 @@ export class ImagenesService {
       })
     )
   }
-
-
-
-
-
-
 }

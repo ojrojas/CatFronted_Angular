@@ -1,1 +1,21 @@
-<h1>Gatos Works!</h1>
+<div class="row justify-content-md-center p-4 m-auto">
+    <div class="col-10">
+        <h4 *ngIf="gatos; else elseBlock">Gatos creados!!</h4>
+        <ng-template #elseBlock><p>Aun no tienes gatos</p><p>Selecciona crear</p></ng-template>
+    </div>
+    <div class="col-2">
+        <button class="btn btn-primary" [routerLink]="['/gatos/crear']">Crear gatos</button>
+    </div>
+</div>
+<div class="row justify-content-md-center p-3 m-auto" *ngIf="gatos"> 
+       <div class="card" *ngFor="let gato of gatos" style="padding: 10px;" [class.selected]="gato === selectedGato"> 
+        <img class="card-img-top" src="{{gato.foto}}" style="width: 200px; height: 200px;" alt="Card image cap">
+        <div class="card-body" style="font-size: 10px;">
+            <h6 class="card-title">{{gato.nombre}}</h6>
+            <p class="card-text">Edad: {{gato.edad}}</p>
+            <p class="card-text">Raza: {{gato.raza}}</p>
+            <a href="#" class="card-link" style="font-size: 14px;">Modificar</a>
+            <a href="#" class="card-link" style="font-size: 14px;">Eliminar</a>
+        </div>
+    </div>
+</div>
