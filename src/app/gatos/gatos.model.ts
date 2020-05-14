@@ -1,9 +1,10 @@
 export class GatosModel {
-    id:number;
+    id:string;
     nombre:string;
     raza:string;
     edad:number;
     foto: string;
+    _id:string;
 
     constructor(obj?: any) {
         this.nombre=  obj && obj.nombre || null;
@@ -11,5 +12,6 @@ export class GatosModel {
         this.raza=  obj && obj.raza || null;
         this.edad=  obj && obj.edad || null;
         this.foto=  obj && obj.foto || null;
+        this._id = obj && obj._id || null;
     }
 }

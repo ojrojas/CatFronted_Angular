@@ -14,8 +14,8 @@
             <h6 class="card-title">{{gato.nombre}}</h6>
             <p class="card-text">Edad: {{gato.edad}}</p>
             <p class="card-text">Raza: {{gato.raza}}</p>
-            <a href="#" class="card-link" style="font-size: 14px;">Modificar</a>
-            <a href="#" class="card-link" style="font-size: 14px;">Eliminar</a>
+            <a [routerLink]="['editar',gato._id]" class="card-link" style="font-size: 14px;">Modificar</a>
+            <a class="card-link" style="font-size: 14px;" (click)="OnEliminar(gato._id)">Eliminar</a>
         </div>
     </div>
 </div>

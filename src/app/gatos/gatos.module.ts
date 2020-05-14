@@ -5,12 +5,16 @@ import { GatosRoutingModule } from './gatos-routing.module';
 import { GatosComponent } from './gatos.component';
 import { CreateGatoComponent } from './creategato.component';
 import { FormsModule } from '@angular/forms';
+import { EditargatoComponent } from './editargato.component';
+import { EliminargatoComponent } from './eliminargato.component';
 
 
 @NgModule({
   declarations: [
     GatosComponent,
-    CreateGatoComponent
+    CreateGatoComponent,
+    EditargatoComponent,
+    EliminargatoComponent
   ],
   imports: [
     CommonModule,

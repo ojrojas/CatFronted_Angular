@@ -23,6 +23,12 @@ export class GatosComponent implements OnInit {
     this.obtenerGatosAsync();
   }
 
+  OnEliminar(id:string){
+    this.gatoService.deleteGato(id).subscribe((val) => {
+      console.log(val);
+      this.obtenerGatosAsync();
+    });
+  }
 
   onSelected(imagenSelected: GatosModel){}
 

@@ -35,20 +35,22 @@ export class GatosService {
               nombre: item.nombre,
               id: item.id,
               raza: item.raza,
-              edad: item.edad
+              edad: item.edad,
+              _id:item._id
             });
           });
         }));
   }
 
   getGato(id: string): Observable<GatosModel> {
-    const urlQuery = this.baseUrls.BaseBackend + '/gatos';
+    const urlQuery = this.baseUrls.BaseBackend + `/gatos/${id}`;
     console.log("urlQuery getGatos", urlQuery);
     return this.http.get<GatosModel>(
       urlQuery, { headers: headers })
       .pipe(
-        map((response: GatosModel) => {
-          return response
+        map((response) => {
+          console.log("response", response);
+          return response;
         }));
   }
 
@@ -62,8 +64,8 @@ export class GatosService {
     )
   }
 
-  deleteGato(gatoDto:GatosModel){
-    const urlQuery =  this.baseUrls.BaseBackend + `/gatos/${gatoDto.id}`;
+  deleteGato(id:string){
+    const urlQuery =  this.baseUrls.BaseBackend + `/gatos/${id}`;
     console.log('urlQuery Crear gato favorito', urlQuery);
     return this.http.delete(urlQuery).pipe(
       map(response => { 
@@ -74,7 +76,7 @@ export class GatosService {
   }
 
   updateGato(gatoDto: GatosModel): Observable<GatosModel> {
-    const urlQuery =  this.baseUrls.BaseBackend + `/gatos/${gatoDto.id}`;
+    const urlQuery =  this.baseUrls.BaseBackend + `/gatos/${gatoDto._id}`;
     console.log('urlQuery Crear gato favorito', urlQuery);
     return this.http.put(urlQuery, gatoDto).pipe(
       map((response:GatosModel) => { 
