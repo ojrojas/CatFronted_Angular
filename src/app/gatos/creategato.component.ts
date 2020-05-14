@@ -53,7 +53,7 @@ export class CreateGatoComponent implements OnInit {
     this.model.foto = imagenSelected.url;
   }
 
-  onSubmit(form: FormGroup) {
+  onSubmit(form) {
     console.log(form.value);
     this.gatoService.createGato(form.value).subscribe(response => {
       console.log(response);
@@ -67,7 +67,6 @@ export class CreateGatoComponent implements OnInit {
     var iKeyCode = (evt.which) ? evt.which : evt.keyCode
     if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
         return false;
-
     return true;
 }    
 
