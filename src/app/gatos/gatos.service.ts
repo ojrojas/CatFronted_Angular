@@ -8,7 +8,7 @@ import { InyectablesRutas } from '../inyectables/inyectable-rutas.service';
 import { ImagenesService } from '../imagenes/imagenes.service';
 
 const headers = new HttpHeaders();
-headers.set('x-api-key', 'f221c99b-304d-4404-b111-cbd3ddccf31a');
+headers.set('x-api-key', 'f221c99b-xerc-4404-jrop-cbd3dhewcf31a');
 
 @Injectable({
   providedIn: 'root'
